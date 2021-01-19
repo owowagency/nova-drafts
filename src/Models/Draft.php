@@ -22,7 +22,6 @@ class Draft extends Model
         if (isset($data->id)) {
             $newResource = $data->replicate();
             $newResource->published = false;
-            $newResource->draft_parent_id = $data->id;
             $newResource->preview_token = Str::random(20);
             $newResource->save();
             return false;
@@ -31,13 +30,6 @@ class Draft extends Model
         $data->published = false;
         $data->preview_token = Str::random(20);
         return true;
-    }
-
-    public static function childDraft($class, $id)
-    {
-        $child = $class::where('draft_parent_id', $id)->get()->first();
-        if ($child === null) return null;
-        return $child->toArray();
     }
 
     public static function draftParent($class, $id)

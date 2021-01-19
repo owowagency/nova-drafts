@@ -17,8 +17,6 @@ class :className extends Migration
         Schema::table($user_table, function ($table) use ($user_table) {
             $table->string('preview_token')->nullable();
             $table->boolean('published')->default(true);
-            $table->bigInteger('draft_parent_id')->nullable()->unsigned();
-            $table->foreign('draft_parent_id')->references('id')->on($user_table)->onDelete('cascade');
 
             // It's recommended to replace your current unique constraint and add published field to it.
 
@@ -37,8 +35,6 @@ class :className extends Migration
     {
         $user_table = ':tableName';
         Schema::table($user_table, function ($table) use ($user_table) {
-            $table->dropForeign($user_table . '_draft_parent_id_foreign');
-            $table->dropColumn('draft_parent_id');
             $table->dropColumn('published');
             $table->dropColumn('preview_token');
 

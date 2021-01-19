@@ -1,13 +1,4 @@
 <template>
-  <button
-    ref="deleteNovaDraftButton"
-    type="button"
-    class="mr-3 btn btn-default btn-danger"
-    v-if="isDraft"
-    v-on:click="discard"
-  >
-    {{ __('novaDrafts.discardDraftButtonText') }}
-  </button>
 </template>
 
 <script>

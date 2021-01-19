@@ -47,8 +47,6 @@ class DraftButton extends Field
             parent::resolve($resource, $attribute);
 
             $this->withMeta([
-                'childDraft' => Draft::childDraft(get_class($resource), $resource->id),
-                'isDraft' => (isset($resource->draft_parent_id) || (!isset($resource->draft_parent_id) && !$resource->published && isset($resource->id))),
             ]);
         }
     }
@@ -60,7 +58,7 @@ class DraftButton extends Field
 
     protected function isDraft($resource)
     {
-        return (isset($resource->draft_parent_id) || (!isset($resource->draft_parent_id) && !$resource->published && isset($resource->id)));
+        return !$resource->published;
     }
 
     public function draftsEnabled($enabled)

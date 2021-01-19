@@ -23,10 +23,6 @@ class UnpublishButton extends Field
     protected function isUnpublishable($resource)
     {
         if ($resource->published) return true;
-        if (isset($resource->draft_parent_id)) {
-            $draftParent = $resource::find($resource->draft_parent_id);
-            if (isset($draftParent) && $draftParent->published) return true;
-        }
         return false;
     }
 }
